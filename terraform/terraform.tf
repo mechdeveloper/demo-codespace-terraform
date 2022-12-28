@@ -2,9 +2,9 @@ terraform {
   required_version = ">=1.3.0"
 
   cloud {
-    organization = "<your-terraform-organization-name>"
+    organization = "learn-terraform-io"
     workspaces {
-      name = "<your-terraform-workspace-name>"
+      name = "hashitalks-demo"
     }
   }
 
