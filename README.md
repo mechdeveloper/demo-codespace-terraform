@@ -40,13 +40,25 @@ If you already have VS Code and Docker installed, you can click the badge above 
     
     {​
       "appId": "00111232-4466-6546-7897-7412321598756547",
-      ​"displayName": "TerraformSP",​
+      ​"displayName": "Terraform",​
       "password": "7521-2314-7169-9658-456574136987",​
       "tenant": "11111111-1111-1111-1111-111111111111"​
     }
     ```
+    
+    Check your service principal
+    ```
+    az ad sp list --display-name Terraform
+    ```
+    Output appId of service principal 
+    ```
+    az ad sp list --display-name Terraform --query "[].appId" -o tsv
+    ```
 
-
+    Check role assignment
+    ```
+    az role assignment list --asignee <appId>
+    ```
       
 - GitHub Codespaces: Create codespaces for your GitHub repository
   - Add DevContainer configuration file
@@ -85,7 +97,7 @@ If you already have VS Code and Docker installed, you can click the badge above 
     ```
     terraform init
     ```
-  - Assign Variable Set to workspace
+    
   - Create Infrastructure
     ```
     terraform apply
