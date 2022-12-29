@@ -33,15 +33,16 @@ If you already have VS Code and Docker installed, you can click the badge above 
     ```
   - create a service principal and configure its access to azure resources
     ```
-    az ad sp create-for-rbac \​
-        --display-name="Terraform" \​
-        --role="Contributor" \​
-        --scopes="/subscriptions/SUBSCRIPTION_ID"​
+    # fetch subscription id
+    SUBSCRIPTION_ID=$(az account show --query id -o tsv)
+    
+    # Create service principal
+    az ad sp create-for-rbac --name Terraform --role Contributor --scopes /subscriptions/$SUBSCRIPTION_ID
     
     {​
       "appId": "00111232-4466-6546-7897-7412321598756547",
       ​"displayName": "Terraform",​
-      "password": "7521-2314-7169-9658-456574136987",​
+      "password": ".WB8Q~Lzfc1GLmPWnCguzrKC6gfsTNKzUQVSgfdS",​
       "tenant": "11111111-1111-1111-1111-111111111111"​
     }
     ```
@@ -50,14 +51,11 @@ If you already have VS Code and Docker installed, you can click the badge above 
     ```
     az ad sp list --display-name Terraform
     ```
-    Output appId of service principal 
-    ```
-    az ad sp list --display-name Terraform --query "[].appId" -o tsv
-    ```
 
     Check role assignment
     ```
-    az role assignment list --asignee <appId>
+    SP_TERRAFORM_APP_ID=$(az ad sp list --display-name Terraform --query "[].appId" -o tsv)
+    az role assignment list --assignee $SP_TERRAFORM_APP_ID
     ```
       
 - GitHub Codespaces: Create codespaces for your GitHub repository
@@ -102,3 +100,40 @@ If you already have VS Code and Docker installed, you can click the badge above 
     ```
     terraform apply
     ```
+  
+  - Destroy Infrastructure 
+    Important Note: Do not forget to destroy your unused infrastructure to save cost
+    ```
+    terraform destroy
+    ```
+
+## Clean Up
+
+- Azure: Clean Up service principal and role assignment
+
+  Delete Role Assignment 
+  ```
+  # fetch `appId` of service principal
+  SP_TERRAFORM_APP_ID=$(az ad sp list --display-name Terraform --query "[].appId" -o tsv)
+  
+  # List Role Assignment
+  az role assignment list --assignee $SP_TERRAFORM_APP_ID 
+  
+  # Delete Role Assignment
+  az role assignment delete --assignee $SP_TERRAFORM_APP_ID 
+  ```
+
+  Delete service principal
+  ```
+  # List Service Principal 
+  az ad sp list --display-name Terraform
+
+  # fetch `appId` of service principal
+  SP_TERRAFORM_APP_ID=$(az ad sp list --display-name Terraform --query "[].appId" -o tsv)
+
+  # Show Service Principal
+  az ad sp show --id $SP_TERRAFORM_APP_ID
+
+  # Delete Service Principal
+  az ad sp delete --id $SP_TERRAFORM_APP_ID
+  ```
