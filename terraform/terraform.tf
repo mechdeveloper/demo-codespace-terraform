@@ -2,7 +2,7 @@ terraform {
   required_version = ">=1.3.0"
 
   cloud {
-    organization = "hashitalks-india"
+    organization = "<Your-Terraform-Cloud-Organization-Name-Here>"
     workspaces {
       name = "hashitalks-demo"
     }

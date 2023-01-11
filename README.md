@@ -149,7 +149,7 @@ __Github CodeSpaces__
     terraform {​
       required_version = ">=1.3.0"​
       cloud {​
-        organization = "organization-name"​
+        organization = "<Your-Terraform-Cloud-Organization-Name-Here>"
         workspaces {​
           name = "workspace-name"​
         }​
