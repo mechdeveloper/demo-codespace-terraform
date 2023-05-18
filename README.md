@@ -7,7 +7,7 @@ If you already have VS Code and Docker installed, you can click the badge above 
 | Topic | Description |
 |-|-|
 | Event Date | January 12, 2023 |
-| YouTube - HashiCorp | <https://youtu.be/NrIfq2FtL4A?t=4119> |
+| YouTube - HashiCorp | <https://youtu.be/ByCeAQlJQvM> |
 | YouTube - Ashish Singh Baghel | <https://youtu.be/0pNZ2UWkPfQ> |
 
 ## Deploy Infrastructure as Code on Azure using Github Codespaces and Terraform Cloud
