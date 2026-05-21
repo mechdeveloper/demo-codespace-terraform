@@ -112,7 +112,7 @@ __Github CodeSpaces__
     | `ARM_CLIENT_ID` | `appId` | Environment Variable |
     | `ARM_CLIENT_SECRET` | `password` | Environment Variable |
 
-    > Note: We get these values as output of Azure CLI create service principal command. If you lose If you lose the credentials for a service principal, use `az ad sp credential reset`. The reset command takes the same parameters as `az ad sp create-for-rbac`.
+    > Note: We get these values as output of Azure CLI create service principal command. If you lose the credentials for a service principal, use `az ad sp credential reset`. The reset command takes the same parameters as `az ad sp create-for-rbac`.
     ```
     az ad sp credential reset --name TerraformCloud --role Contributor --scopes /subscriptions/$SUBSCRIPTION_ID
     ```
